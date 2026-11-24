@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+@import 'material-symbols/outlined.css';
+@import '@fontsource-variable/inter/index.css';
+
+html {
+  @include mat.theme((color: (primary: mat.$cyan-palette, tertiary: mat.$green-palette), typography: Inter Variable, density: 0));
+  --navy: #122a3e;
+  --teal: #087d73;
+  --ink: #172d3f;
+  --muted: #526777;
+  --paper: #f4f7f8;
+  --line: #dce6ea;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--paper); font: 15px/1.55 'Inter Variable', Inter, 'Segoe UI', sans-serif; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { line-height: 1.12; letter-spacing: -.035em; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.3rem, 3vw, 1.85rem); }
+h3 { font-size: 1.12rem; }
+a { color: var(--teal); }
+:focus-visible { outline: 3px solid #2caea4; outline-offset: 4px; }
+.muted { color: var(--muted); }
+.eyebrow { text-transform: uppercase; color: var(--teal); font-weight: 750; font-size: .73rem; letter-spacing: .13em; }
+.card { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+.stack { display: grid; gap: 20px; }
+.section-title { display: grid; gap: 8px; margin-bottom: 24px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+a[mat-flat-button], button[mat-flat-button] { background: var(--teal); color: white; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; font-size: 1.24rem; font-weight: 800; letter-spacing: -.05em; white-space: nowrap; }
+.brand-mark, .icon-box { display: inline-grid; place-items: center; background: #dff2ef; color: #076b62; border-radius: 11px; width: 42px; height: 42px; flex: none; }
+.pill { display: inline-block; border-radius: 20px; padding: 4px 10px; font-size: .77rem; font-weight: 680; white-space: nowrap; background: #e8eff2; color: #3f5667; }
+.pill[data-tone='success'] { background: #daf1e5; color: #136249; }
+.pill[data-tone='danger'] { background: #fce5e5; color: #963333; }
+.pill[data-tone='warning'] { background: #fff0d3; color: #79550c; }
+.pill[data-tone='info'] { background: #e3effa; color: #2a527c; }
+.notice { background: #e9f5f3; border-left: 3px solid var(--teal); color: #235752; padding: 12px 15px; border-radius: 5px; }
+mat-form-field { width: 100%; }

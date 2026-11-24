@@ -1,0 +1,10 @@
+<section class="stack">
+  <a routerLink="/signalements">← Retour aux signalements</a>
+  @if (report; as item) {
+    <div class="section-title"><p class="eyebrow">{{ item.id }} · {{ item.district }}</p><h1>{{ item.title }}</h1><p class="muted">Déclaré le {{ item.date }}</p></div>
+    <div class="detail-grid">
+      <article class="card stack"><h2>Signalement citoyen</h2><p>{{ item.description }}</p><dl><dt>Statut</dt><dd><span class="pill" [attr.data-tone]="tone(item.status)">{{ item.status }}</span></dd><dt>Catégorie</dt><dd>{{ item.category }}</dd><dt>Quartier</dt><dd>{{ item.district }}</dd></dl></article>
+      <article class="card stack"><div class="row"><span class="icon-box"><mat-icon fontSet="material-symbols-outlined">analytics</mat-icon></span><span class="pill" data-tone="info">Aperçu</span></div><h2>Analyse assistée</h2><p class="notice">Exemple d’affichage basé sur les données fictives du dossier.</p><dl><dt>Catégorie proposée</dt><dd>{{ item.category }}</dd><dt>Gravité proposée</dt><dd>{{ item.severity }}</dd><dt>Comparaison de doublons</dt><dd>En attente d’intégration</dd></dl></article>
+    </div>
+  } @else { <div class="card stack"><h1>Signalement introuvable</h1><p>Cette référence ne figure pas dans les dossiers de démonstration.</p></div> }
+</section>

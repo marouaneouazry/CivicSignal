@@ -1,0 +1,19 @@
+<section class="container block account-layout">
+  <aside class="account-intro stack">
+    <span class="icon-box"><mat-icon fontSet="material-symbols-outlined">person</mat-icon></span>
+    <p class="eyebrow">Espace citoyen</p>
+    <h1>Vos signalements, au même endroit.</h1>
+    <p>Retrouvez vos demandes et leur état d’avancement depuis votre espace CivicSignal.</p>
+  </aside>
+  <div class="card account-card stack">
+    <div class="section-title"><h2>{{ register ? 'Créer un compte' : 'Se connecter' }}</h2><p class="muted">Formulaire de démonstration · utilisez des données fictives.</p></div>
+    <form class="stack" (submit)="$event.preventDefault(); submitted.set(true)">
+      @if (register) { <mat-form-field appearance="outline"><mat-label>Nom complet</mat-label><input matInput required autocomplete="name"></mat-form-field> }
+      <mat-form-field appearance="outline"><mat-label>Adresse e-mail</mat-label><input matInput required type="email" autocomplete="email"></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Mot de passe</mat-label><input matInput required type="password" [attr.autocomplete]="register ? 'new-password' : 'current-password'"></mat-form-field>
+      <button mat-flat-button type="submit">{{ register ? 'Créer mon compte' : 'Me connecter' }}</button>
+    </form>
+    @if (submitted()) { <p class="notice" role="status">Aperçu terminé. L’authentification sera intégrée à une prochaine étape.</p> }
+    <p><a [routerLink]="register ? '/connexion' : '/inscription'">{{ register ? 'Déjà un compte ? Se connecter' : 'Créer un compte citoyen' }}</a></p>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+<section class="container block">
+  <div class="section-title"><p class="eyebrow">Portail citoyen</p><h1>Nouveau signalement</h1><p class="muted">Décrivez le problème observé et indiquez son emplacement.</p></div>
+  <p class="notice form-notice">Mode démonstration · les informations saisies restent dans cette page.</p>
+  <form class="submission-grid" (submit)="submit($event)">
+    <div class="card stack">
+      <h2>Décrire le problème</h2>
+      <mat-form-field appearance="outline"><mat-label>Catégorie indicative</mat-label><mat-select [value]="category">@for (item of categories; track item.name) {<mat-option [value]="item.name">{{ item.name }}</mat-option>}</mat-select></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Description</mat-label><textarea matInput rows="5" required maxlength="1000" placeholder="Que se passe-t-il ?"></textarea></mat-form-field>
+      <div class="upload stack">
+        <label for="photos"><strong>Ajouter des photos</strong><br><small>1 à 5 images · JPG, PNG ou WebP · 5 Mo par image</small></label>
+        <input id="photos" type="file" multiple accept="image/jpeg,image/png,image/webp" (change)="selectImages($event)">
+        @if (fileMessage()) { <p role="alert">{{ fileMessage() }}</p> }
+        <div class="previews">@for (photo of previews(); track photo.url) {
+          <div><img [src]="photo.url" [alt]="photo.name"><button mat-button type="button" [attr.aria-label]="'Retirer ' + photo.name" (click)="removeImage(photo.url)">Retirer</button></div>
+        }</div>
+      </div>
+    </div>
+    <div class="card stack">
+      <h2>Localiser le problème</h2><p class="muted">Cliquez sur la carte ou déplacez-la, puis sélectionnez son centre.</p>
+      <div class="location-map" #mapHost aria-label="Carte de Casablanca"></div>
+      <button mat-stroked-button type="button" (click)="selectCenter()">Sélectionner le centre de la carte</button>
+      @if (mapMessage()) { <p class="muted">{{ mapMessage() }}</p> }
+      @if (location(); as point) { <p role="status">Position sélectionnée · {{ point.lat.toFixed(5) }}, {{ point.lng.toFixed(5) }}</p> }
+    </div>
+    <div class="actions form-footer"><button mat-flat-button type="submit">Vérifier le signalement</button>@if (feedback()) { <p role="status">{{ feedback() }}</p> }</div>
+  </form>
+</section>

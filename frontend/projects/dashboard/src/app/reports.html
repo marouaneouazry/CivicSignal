@@ -1,0 +1,11 @@
+<section class="stack"><div class="section-title"><p class="eyebrow">Suivi municipal</p><h1>Signalements</h1><p class="muted">Consultez les dossiers fictifs et filtrez-les par catégorie, gravité ou statut.</p></div>
+  <div class="card stack">
+    <div class="filters">
+      <mat-form-field appearance="outline"><mat-label>Rechercher</mat-label><input matInput #query (input)="search.set(query.value)" placeholder="Titre, quartier ou référence"></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Catégorie</mat-label><mat-select [value]="category()" (selectionChange)="category.set($event.value)"><mat-option value="">Toutes</mat-option>@for (item of categories; track item.name) {<mat-option [value]="item.name">{{ item.name }}</mat-option>}</mat-select></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Gravité</mat-label><mat-select [value]="severity()" (selectionChange)="severity.set($event.value)"><mat-option value="">Toutes</mat-option>@for (item of severities; track item) {<mat-option [value]="item">{{ item }}</mat-option>}</mat-select></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Statut</mat-label><mat-select [value]="status()" (selectionChange)="status.set($event.value)"><mat-option value="">Tous</mat-option>@for (item of statuses; track item) {<mat-option [value]="item">{{ item }}</mat-option>}</mat-select></mat-form-field>
+    </div>
+    <p class="muted" role="status">{{ filtered().length }} dossier(s)</p><civic-report-table [reports]="filtered()" />
+  </div>
+</section>

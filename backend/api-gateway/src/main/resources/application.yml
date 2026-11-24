@@ -1,0 +1,53 @@
+server:
+  port: ${SERVER_PORT:8080}
+  address: ${SERVER_ADDRESS:127.0.0.1}
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/auth,/api/auth/**,/api/users,/api/users/**
+              filters:
+                - StripPrefix=1
+            - id: report-service
+              uri: lb://report-service
+              predicates:
+                - Path=/api/reports,/api/reports/**,/api/categories,/api/categories/**
+              filters:
+                - StripPrefix=1
+            - id: workflow-service
+              uri: lb://workflow-service
+              predicates:
+                - Path=/api/workflow,/api/workflow/**,/api/departments,/api/departments/**,/api/priority-rules,/api/priority-rules/**,/api/stats,/api/stats/**
+              filters:
+                - StripPrefix=1
+            - id: notification-service
+              uri: lb://notification-service
+              predicates:
+                - Path=/api/notifications,/api/notifications/**
+              filters:
+                - StripPrefix=1
+            - id: ai-cost-estimate
+              uri: ${AI_SERVICE_URL:http://localhost:8000}
+              predicates:
+                - Path=/api/ai/cost-estimate
+                - Method=POST
+              filters:
+                - StripPrefix=1
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+  instance:
+    hostname: ${SERVICE_HOSTNAME:localhost}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

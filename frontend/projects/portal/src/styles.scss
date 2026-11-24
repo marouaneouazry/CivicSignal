@@ -1,0 +1,55 @@
+@use '../../shared/theme';
+@import 'leaflet/dist/leaflet.css';
+
+.container { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+.portal-header { background: #fff; border-bottom: 1px solid var(--line); }
+.header-inner, .portal-footer .container, .page-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.header-inner { min-height: 76px; padding-block: 10px; }
+.header-inner nav { display: flex; gap: 28px; }
+.header-inner nav a { text-decoration: none; color: var(--muted); font-weight: 580; }
+.header-inner nav a.active { color: var(--teal); }
+.hero { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding-block: 56px; }
+.hero-copy { display: grid; gap: 22px; }
+.hero h1 { font-size: clamp(2.55rem, 5.3vw, 4.3rem); letter-spacing: -.065em; }
+.hero h1 span { color: var(--teal); }
+.hero-lead { color: var(--muted); max-width: 48ch; font-size: 1.08rem; }
+.city-photo { margin: 0; min-height: 330px; aspect-ratio: 1.28; position: relative; border-radius: 24px; overflow: hidden; background: #cfe4df; }
+.city-photo img { width: 100%; height: 100%; position: absolute; object-fit: cover; }
+.city-photo figcaption { display: flex; align-items: center; gap: 8px; position: absolute; bottom: 18px; left: 18px; background: #fff; border-radius: 10px; padding: 8px 13px; font-weight: 650; }
+.categories { background: #fff; border-block: 1px solid var(--line); }
+.block { padding-block: 45px; }
+.category-grid, .report-grid, .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.category-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.category { display: grid; gap: 12px; text-decoration: none; color: var(--ink); }
+.category:hover { border-color: var(--teal); }
+.steps article { display: grid; gap: 10px; }
+.callout, .account-intro { background: var(--navy); color: #fff; border-radius: 20px; padding: 30px; }
+.callout { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+.callout p { margin-top: 7px; }
+.portal-footer { border-top: 1px solid var(--line); background: #fff; padding-block: 22px; }
+.account-layout, .submission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+.account-layout { max-width: 900px; }
+.account-intro { min-height: 320px; align-content: center; }
+.account-intro .eyebrow { color: #9de0d7; }
+.account-card .section-title { margin: 0; }
+.form-notice { margin-bottom: 18px; }
+.form-footer { grid-column: 1 / -1; }
+.upload { border: 1px dashed #9db8bf; border-radius: 10px; padding: 16px; }
+.previews { display: flex; gap: 8px; flex-wrap: wrap; }
+.previews img { display: block; width: 90px; height: 76px; object-fit: cover; border-radius: 6px; }
+.location-map { min-height: 302px; border-radius: 10px; background: #e3eeee; z-index: 0; }
+@media (max-width: 820px) {
+  .hero { gap: 24px; }
+  .category-grid, .report-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .header-inner { flex-wrap: wrap; }
+}
+@media (max-width: 620px) {
+  .container { width: calc(100% - 28px); }
+  .header-inner nav { order: 2; width: 100%; padding-bottom: 5px; gap: 16px; }
+  .header-inner .actions { gap: 3px; }
+  .hero, .steps, .account-layout, .submission-grid, .report-grid { grid-template-columns: 1fr; }
+  .hero { padding-block: 30px; }
+  .city-photo { min-height: 210px; aspect-ratio: 1.65; }
+  .card { padding: 16px; }
+  .portal-footer .container, .page-heading { flex-wrap: wrap; }
+}

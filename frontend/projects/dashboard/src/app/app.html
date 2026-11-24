@@ -1,0 +1,15 @@
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" routerLink="/"><span class="brand-mark"><mat-icon fontSet="material-symbols-outlined">location_city</mat-icon></span>CivicSignal</a>
+    <p class="sidebar-label">Espace municipal</p>
+    <nav aria-label="Navigation municipale">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><mat-icon fontSet="material-symbols-outlined">space_dashboard</mat-icon> Vue d’ensemble</a>
+      <a routerLink="/signalements" routerLinkActive="active"><mat-icon fontSet="material-symbols-outlined">flag</mat-icon> Signalements</a>
+    </nav>
+    <div class="sidebar-foot"><mat-icon fontSet="material-symbols-outlined">location_on</mat-icon> Casablanca, Maroc</div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span>Espace municipal <span class="topbar-city">/ Casablanca</span></span><span class="pill">Mode démonstration</span></header>
+    <main class="workspace-content"><router-outlet /></main>
+  </div>
+</div>

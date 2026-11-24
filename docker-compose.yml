@@ -1,0 +1,69 @@
+name: civicsignal
+services:
+  postgres:
+    image: postgis/postgis:17-3.7@sha256:0ea2759d63dae90e778f689bb65b5bc698929697ee188a1ca0aba104b3772264
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      AUTH_DB_USER: ${AUTH_DB_USER:?Set AUTH_DB_USER in .env}
+      REPORT_DB_USER: ${REPORT_DB_USER:?Set REPORT_DB_USER in .env}
+      WORKFLOW_DB_USER: ${WORKFLOW_DB_USER:?Set WORKFLOW_DB_USER in .env}
+      NOTIFICATION_DB_USER: ${NOTIFICATION_DB_USER:?Set NOTIFICATION_DB_USER in .env}
+      AUTH_DB_PASSWORD: ${AUTH_DB_PASSWORD:?Set AUTH_DB_PASSWORD in .env}
+      REPORT_DB_PASSWORD: ${REPORT_DB_PASSWORD:?Set REPORT_DB_PASSWORD in .env}
+      WORKFLOW_DB_PASSWORD: ${WORKFLOW_DB_PASSWORD:?Set WORKFLOW_DB_PASSWORD in .env}
+      NOTIFICATION_DB_PASSWORD: ${NOTIFICATION_DB_PASSWORD:?Set NOTIFICATION_DB_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./infrastructure/postgres/20-services.sh:/docker-entrypoint-initdb.d/20-services.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U $$POSTGRES_USER -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 8
+
+  rabbitmq:
+    image: rabbitmq:4.2.9-management@sha256:ccc474914a27f60b402c0945847b4b95987968525bc608a25f91b4baab299055
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:?Set RABBITMQ_USER in .env}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?Set RABBITMQ_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 8
+
+  minio:
+    image: civicsignal/minio:RELEASE.2025-10-15T17-29-55Z
+    build: ./infrastructure/minio
+    pull_policy: never
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER in .env}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    volumes:
+      - minio:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9000/minio/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 8
+
+volumes:
+  postgres:
+  rabbitmq:
+  minio:
+
+networks:
+  default:
+    name: civicsignal-net

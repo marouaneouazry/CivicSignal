@@ -1,0 +1,15 @@
+<section class="stack">
+  <div class="section-title"><p class="eyebrow">Suivi municipal</p><h1>Vue d’ensemble</h1><p class="muted">Activité fictive à Casablanca · 18 au 24 novembre 2026</p></div>
+  <div class="kpis">@for (item of indicators; track item.label) {
+    <article class="card kpi"><span class="icon-box"><mat-icon fontSet="material-symbols-outlined">{{ item.icon }}</mat-icon></span><strong>{{ item.value }}</strong><p class="muted">{{ item.label }}</p></article>
+  }</div>
+  <div class="charts">
+    <article class="card stack"><div><h2>Signalements reçus</h2><p class="muted">Nombre par jour</p></div>
+      <div class="bar-chart">@for (day of activity; track day.label) {<div class="bar-item"><strong>{{ day.count }}</strong><span class="bar-fill" aria-hidden="true" [style.height.px]="day.count * 4"></span><small>{{ day.label }}</small></div>}</div>
+    </article>
+    <article class="card stack"><div><h2>Par catégorie</h2><p class="muted">Répartition sur la période</p></div>
+      @for (item of breakdown; track item.name) {<div class="breakdown"><div><span>{{ item.name }}</span><strong>{{ item.count }}</strong></div><div class="track" aria-hidden="true"><span [style.width.%]="100 * item.count / total"></span></div></div>}
+    </article>
+  </div>
+  <section class="card stack"><div class="row"><h2>Signalements récents</h2><a mat-stroked-button routerLink="/signalements">Tout consulter</a></div><civic-report-table [reports]="reports" /></section>
+</section>

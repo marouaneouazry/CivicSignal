@@ -1,0 +1,25 @@
+<section class="container hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Portail citoyen · Casablanca</p>
+    <h1>Votre quartier,<br> <span>votre signalement.</span></h1>
+    <p class="hero-lead">Un nid-de-poule, un lampadaire en panne, des déchets dans la rue ? Indiquez le problème et suivez son traitement depuis votre espace citoyen.</p>
+    <div class="actions"><a mat-flat-button routerLink="/signaler">Faire un signalement <mat-icon iconPositionEnd fontSet="material-symbols-outlined">arrow_forward</mat-icon></a><a mat-stroked-button href="#fonctionnement">Comment ça marche</a></div>
+  </div>
+  <figure class="city-photo"><img src="casablanca.png" alt="Illustration d’une avenue de Casablanca avec un tramway"><figcaption><mat-icon fontSet="material-symbols-outlined">location_on</mat-icon> Casablanca, Maroc</figcaption></figure>
+</section>
+<section class="categories"><div class="container block">
+  <div class="section-title"><h2>Que pouvez-vous signaler ?</h2><p class="muted">Les problèmes du quotidien dans l’espace public.</p></div>
+  <div class="category-grid">@for (category of categories; track category.name) {
+    <a class="card category" routerLink="/signaler" [queryParams]="{categorie: category.name}">
+      <span class="icon-box"><mat-icon fontSet="material-symbols-outlined">{{ category.icon }}</mat-icon></span>
+      <h3>{{ category.name }}</h3><p class="muted">{{ category.description }}</p>
+    </a>
+  }</div>
+</div></section>
+<section class="container block" id="fonctionnement">
+  <div class="section-title"><h2>Comment ça marche ?</h2></div>
+  <div class="steps">@for (step of steps; track step.title) {
+    <article><span class="icon-box"><mat-icon fontSet="material-symbols-outlined">{{ step.icon }}</mat-icon></span><h3>{{ step.title }}</h3><p class="muted">{{ step.text }}</p></article>
+  }</div>
+  <div class="callout"><div><h2>Un problème dans votre rue ?</h2><p>Indiquez où les équipes municipales doivent regarder.</p></div><a mat-flat-button routerLink="/signaler">Ouvrir le formulaire</a></div>
+</section>

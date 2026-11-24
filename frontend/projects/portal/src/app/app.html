@@ -1,0 +1,12 @@
+<header class="portal-header">
+  <div class="container header-inner">
+    <a class="brand" routerLink="/"><span class="brand-mark"><mat-icon fontSet="material-symbols-outlined">location_city</mat-icon></span>CivicSignal</a>
+    <nav aria-label="Navigation citoyenne">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Accueil</a>
+      <a routerLink="/mes-signalements" routerLinkActive="active">Mes signalements</a>
+    </nav>
+    <div class="actions"><a mat-button routerLink="/connexion">Connexion</a><a mat-flat-button routerLink="/signaler">Signaler</a></div>
+  </div>
+</header>
+<main id="contenu"><router-outlet /></main>
+<footer class="portal-footer"><div class="container"><strong>CivicSignal</strong><span>Projet académique · Casablanca</span><a routerLink="/inscription">Créer un compte</a></div></footer>

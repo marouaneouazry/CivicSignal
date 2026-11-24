@@ -1,0 +1,67 @@
+# Environment and credentials
+.env
+.env.*
+!.env.example
+.envrc
+.npmrc
+.pypirc
+.aws/
+secrets/
+credentials.json
+*-credentials.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Dependencies, build output and local verification
+node_modules/
+target/
+dist/
+build/
+out/
+coverage/
+.angular/
+.maven-cache/
+.verification/
+.cache/
+*.tsbuildinfo
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# IDE, operating system and logs
+.idea/
+.vscode/
+.vs/
+*.iml
+.project
+.classpath
+.settings/
+.DS_Store
+Thumbs.db
+*.log
+logs/
+
+# Local datasets and trained artifacts
+/ai-service/datasets/*
+!/ai-service/datasets/README.md
+/ai-service/models/*
+!/ai-service/models/README.md
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.safetensors
+*.h5
+*.joblib
